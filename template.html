@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>Redcap-IF</title>
+</head>
+<body>
+	<img src="/static/scenes/{scene}.jpg" id="scene_img"/>
+	<form id="form" method="get" action="/scene">
+		<input type="hidden" name="scene" id="scene_name" value="{scene}">
+		<input type="hidden" name="log" id="log" value="{log}">
+		<div id="characters">
+			{characters}
+		</div>
+		<div id="options">
+			{options}			
+		</div>
+		<div id="text">
+			{text}
+		</div>
+	</form>
+	<div id="rotate"><br/>Landscape layout required!<br/>Please rotate your device screen in landscape mode</div>
+<link rel="stylesheet" type="text/css" href="/static/style.css"></style>
+<script type="text/javascript" src="/static/script.js"></script>
+</body>
+</html>
