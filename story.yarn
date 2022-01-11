@@ -1,13 +1,22 @@
 title: Start
 ---
-This is a test of shortcut functionality.
+This is a test of the jump functionality.
 
--> Option 1
-    Option 1 selected.
--> Option 2
-    Option 2 selected.
--> Option 3
--> Option 4
+[[Begin Jump|begin_jump]]
+===
+title: begin_jump
+---
 
-This is the last line.
+Some text is output.
+
+[[jump_stage_2]]
+
+===
+title: jump_stage_2
+---
+[[jump_complete]]
+===
+title: jump_complete
+---
+The jump is now complete.
 ===

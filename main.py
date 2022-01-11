@@ -4,6 +4,8 @@ Written for the Interact-IF game jam
 """
 from typing import Optional
 
+from html import escape, unescape
+
 import uvicorn  # type: ignore
 from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse
@@ -36,19 +38,27 @@ def init(log: str = "") -> YarnRunner:
 
     # Open the compiled story and strings CSV.
     story_f = open(story + ".yarnc", "rb")
-    strings_f = open(story + ".csv", "r")
+    strings_f = open(story + ".csv")
 
     # Create the runner
-    r = YarnRunner(story_f, strings_f, autostart=False, enable_tracing=debug)
+    if log:
+        assert log.startswith(f"""YarnRunner(open("{story+'.yarnc'}", "rb"), open("{story+'.csv'}"), """)
+        assert log.count('(') == 3  # TODO could this be too restrictive
+        assert log.count(';') == 0  # TODO could this be too restrictive
+        r = eval(log)
+        r.option_buffer = []
+    else:
+        r = YarnRunner(story_f, strings_f, autostart=False, enable_tracing=debug)
+    print(r)
 
-    for choice in log.split(","):
-        if choice and choice.strip():
-            try:
-                v = int(choice.strip())
-                print(f"making a choice: {v}")
-                choose(r, v)
-            except ValueError:
-                print(f"not a choice: {choice}")
+    # for choice in log.split(","):
+    #     if choice and choice.strip():
+    #         try:
+    #             v = int(choice.strip())
+    #             print(f"making a choice: {v}")
+    #             choose(r, v)
+    #         except ValueError:
+    #             print(f"not a choice: {choice}")
 
 
     # # Register any command handlers
@@ -95,8 +105,9 @@ def choose(r: YarnRunner, opt: int):
         print(f"Skipping: {get_text(r)}")        
 
     # Make a choice and run until the next choice point or the end
-    if opt in r.get_choices():
-        r.choose(opt)
+    match = [opt for c in r.get_choices() if c["index"] == opt]
+    if match:
+        r.choose(match[0])
     else:
         print("Unable to make choice")
 
@@ -123,18 +134,19 @@ def show(scene: Optional[str] = None, log: Optional[str] = None, choice: Optiona
 
     chars = "".join(CHARACTER.format(character=name) for name in char_map[scene])
 
-    runner = init(log)
+    print(unescape(log))
+    runner = init(unescape(log))
 
-    runner.resume()
-
-    # if choice:
-    #     choose(runner, int(choice))
+    if choice != None:
+        choose(runner, int(choice))
+    else:
+        runner.resume()
 
     opts = get_choices(runner)
+
     txt = get_text(runner)
 
-    print("end")
-    return PAGE.format(scene=scene, log=log, characters=chars, options=opts, text=txt)
+    return PAGE.format(scene=scene, log=escape(repr(runner)), characters=chars, options=opts, text=txt)
 
 
 if __name__ == "__main__":
