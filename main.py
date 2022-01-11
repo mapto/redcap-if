@@ -39,7 +39,7 @@ def init(log: str = "") -> YarnRunner:
     strings_f = open(story + ".csv", "r")
 
     # Create the runner
-    r = YarnRunner(story_f, strings_f, autostart=False)
+    r = YarnRunner(story_f, strings_f, autostart=False, enable_tracing=debug)
 
     for choice in log.split(","):
         if choice and choice.strip():

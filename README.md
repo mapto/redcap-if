@@ -17,7 +17,11 @@ From a command prompt in the project directory run:
 ```
 python3 main.py
 ```
-Then with your browser open http://0.0.0.0:3000/scene
+Then with your browser open http://0.0.0.0:3000/scene and you should see this wireframe (red from the compiled files for [story.yarn](story.yarn))
+
+
+![Wireframe](wireframe.png "Wireframe")
+
 
 To change configuration edit your local [config.py](https://github.com/mapto/redcap-if/blob/main/config.py)
 

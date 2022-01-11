@@ -1,5 +1,4 @@
 aiofiles
 fastapi
-protobuf
-pytest
 uvicorn[standard]
+git+https://github.com/mapto/YarnRunner-Python@main#egg=yarnrunner_python
