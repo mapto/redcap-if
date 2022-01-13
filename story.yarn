@@ -2,24 +2,23 @@ title: Start
 ---
 This is a test of the jump functionality.
 
--> Begin Jump
-	<<jump begin_jump>>
+[[Begin Jump|begin_jump]]
 ===
 title: begin_jump
 ---
 
 Some text is output.
 
-<<jump jump_stage_2>>
+[[jump_stage_2]]
 
 ===
 title: jump_stage_2
 ---
-<<jump jump_complete>>
+[[jump_complete]]
 ===
 title: jump_complete
 ---
 The jump is now complete.
 
-Test #2.
+Test extra text after.
 ===
