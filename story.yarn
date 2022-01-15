@@ -2,19 +2,20 @@ title: Start
 ---
 This is a test of the jump functionality.
 
-[[Begin Jump|begin_jump]]
+-> Begin Jump
+	<<jump begin_jump>>
 ===
 title: begin_jump
 ---
 
-Some text is output.
+Some text is output. Or is it??
 
-[[jump_stage_2]]
+<<jump jump_stage_2>>
 
 ===
 title: jump_stage_2
 ---
-[[jump_complete]]
+<<jump jump_complete>>
 ===
 title: jump_complete
 ---

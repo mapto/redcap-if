@@ -1,5 +1,6 @@
 id,text,file,node,lineNumber
-jump-Start-0,This is a test of the jump functionality.,jump,Start,3
-jump-Start-1,Begin Jump,jump,Start,5
-jump-begin_jump-2,Some text is output.,jump,begin_jump,10
-jump-jump_complete-3,The jump is now complete.,jump,jump_complete,21
+line:F:\games\indie\redcap\redcap-if\story.yarn-Start-0,This is a test of the jump functionality.,F:\games\indie\redcap\redcap-if\story.yarn,Start,3
+line:F:\games\indie\redcap\redcap-if\story.yarn-Start-1,Begin Jump,F:\games\indie\redcap\redcap-if\story.yarn,Start,5
+line:F:\games\indie\redcap\redcap-if\story.yarn-begin_jump-2,Some text is output. Or is it??,F:\games\indie\redcap\redcap-if\story.yarn,begin_jump,11
+line:F:\games\indie\redcap\redcap-if\story.yarn-jump_complete-3,The jump is now complete.,F:\games\indie\redcap\redcap-if\story.yarn,jump_complete,22
+line:F:\games\indie\redcap\redcap-if\story.yarn-jump_complete-4,Test extra text after.,F:\games\indie\redcap\redcap-if\story.yarn,jump_complete,24
