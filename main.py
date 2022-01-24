@@ -39,17 +39,11 @@ def init(log: str = "") -> YarnRunner:
     # Open the compiled story and strings CSV.
     story_f = open(story + ".yarnc", "rb")
     strings_f = open(story + ".csv")
+    r = YarnRunner(story_f, strings_f, autostart=False, enable_tracing=debug)
 
     # Create the runner
     if log:
-        assert log.startswith(f"""YarnRunner(open("{story+'.yarnc'}", "rb"), open("{story+'.csv'}"), """)
-        assert log.count('(') == 3  # TODO could this be too restrictive
-        assert log.count(';') == 0  # TODO could this be too restrictive
-        r = eval(log)
-        r.option_buffer = []
-    else:
-        r = YarnRunner(story_f, strings_f, autostart=False, enable_tracing=debug)
-    print(r)
+        r.load(log)
 
     # for choice in log.split(","):
     #     if choice and choice.strip():
@@ -76,7 +70,7 @@ def get_choices(r: YarnRunner) -> str:
     result = []
     # Access the choices
     for choice in r.get_choices():
-        print(choice)
+        # print(choice)
         result += [
             INPUT_OPTION.format(
                 name=choice["choice"], value=choice["index"], text=choice["text"]
@@ -89,7 +83,7 @@ def get_choices(r: YarnRunner) -> str:
 def get_text(r: YarnRunner) -> str:
     result = "<br/>".join(r.get_lines())
     # Access the lines printed from the story
-    print(result)
+    # print(result)
     return result
 
 
@@ -107,6 +101,7 @@ def choose(r: YarnRunner, opt: int):
     # Make a choice and run until the next choice point or the end
     match = [opt for c in r.get_choices() if c["index"] == opt]
     if match:
+        print(f"Choose {match[0]}")
         r.choose(match[0])
     else:
         print("Unable to make choice")
@@ -143,10 +138,12 @@ def show(scene: Optional[str] = None, log: Optional[str] = None, choice: Optiona
         runner.resume()
 
     opts = get_choices(runner)
-
+    print(f"Opts: {opts}")
     txt = get_text(runner)
+    print(f"Text: {txt}")
 
-    return PAGE.format(scene=scene, log=escape(repr(runner)), characters=chars, options=opts, text=txt)
+    print(runner.save())
+    return PAGE.format(scene=scene, log=escape(runner.save()), characters=chars, options=opts, text=txt)
 
 
 if __name__ == "__main__":
